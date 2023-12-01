@@ -3,7 +3,7 @@ FROM alpine:latest
 
 # Update the package repository and install nmap and libxslt (for xsltproc)
 RUN apk update && \
-    apk add --no-cache nmap libxslt
+    apk add --no-cache nmap libxslt aws-cli
 
 # Copy the scanning script into the container
 COPY scan.sh /scan.sh
