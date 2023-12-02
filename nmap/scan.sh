@@ -1,11 +1,13 @@
 #!/bin/sh
 
-# Display the container's IP addresses
+# Display the scan rage, bucker name, and container's IP addresses
+echo "IP Range: $IP_RANGE"
+echo "Bucket Name: ${BUCKET_NAME}"
 echo "Container's IP Addresses:"
 ip -4 addr show scope global | awk '/inet/ {print $2}' | cut -d/ -f1
 
 # IP range to scan
-IP_RANGE="10.0.1.0/24"
+IP_RANGE=${IP_RANGE:-"10.0.1.1"} # Default value if not set
 
 # Directory to store the reports
 REPORT_DIR="/reports"
@@ -29,7 +31,7 @@ xsltproc -o $REPORT_DIR/scan_$TIMESTAMP.html /usr/share/nmap/nmap.xsl $REPORT_DI
 echo "Scan complete. Reports are stored in $REPORT_DIR"
 
 # S3 Bucket details
-BUCKET_NAME="jorges-test"
+BUCKET_NAME=${BUCKET_NAME:-"jorges-test"}
 FOLDER_NAME="scanning-results"
 
 # Upload the scan reports to the S3 bucket
