@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and push Docker image in ${{ matrix.folder }}
-        if: steps.filter.outputs['${{ matrix.folder }}'] == 't rue'
+        if: steps.filter.outputs.${{ matrix.folder }} == 'true'
         run: |
           cd ${{ matrix.folder }}
           IMAGE_NAME='gorje6/ecs-${{ matrix.folder }}'  # Replace with your Docker Hub username and image name

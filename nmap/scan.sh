@@ -39,6 +39,6 @@ FOLDER_NAME="scanning-results"
 aws s3 cp $REPORT_DIR/scan_$TIMESTAMP.html s3://$BUCKET_NAME/$FOLDER_NAME/scan_$TIMESTAMP.html
 aws s3 cp $REPORT_DIR/scan_$TIMESTAMP.xml s3://$BUCKET_NAME/$FOLDER_NAME/scan_$TIMESTAMP.xml
 
-echo "Reports uploaded to S3 bucket: $BUCKET_NAME/$FOLDER_NAME"
+echo "Reports uploaded to S3 bucket: $BUCKET_NAME/$FOLDER_NAME  "
 
 sleep infinity
