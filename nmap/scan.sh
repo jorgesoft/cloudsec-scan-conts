@@ -18,6 +18,7 @@ TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 
 # Running a quick nmap scan on the specified IP range and saving the reports
 echo "Performing a quick scan on the network: $IP_RANGE"
+#TO DO change the options dynamically from Terraform
 nmap -T4 -F --webxml -oA $REPORT_DIR/scan_$TIMESTAMP $IP_RANGE
 #nmap -T4 -F $IP_RANGE
 

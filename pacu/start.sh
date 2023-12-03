@@ -11,6 +11,7 @@ curl -s http://checkip.amazonaws.com
 
 # Start SSH service
 /usr/sbin/sshd -D
+echo "SSH service running"
 
 # Keep the container running
 tail -f /dev/null
