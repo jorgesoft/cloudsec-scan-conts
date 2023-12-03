@@ -27,11 +27,11 @@ jobs:
         uses: dorny/paths-filter@v2
         with:
           filters: |
-            folder1:
+            nmap:
               - 'nmap/**'
-            folder2:
+            pacu:
               - 'pacu/**'
-            folder3:
+            prowler:
               - 'prowler/**'
 
       - name: Log in to Docker Hub
