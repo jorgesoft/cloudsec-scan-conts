@@ -16,4 +16,4 @@ aws s3 cp /usr/src/app/output/ "s3://$BUCKET_NAME/$FOLDER_NAME/" --recursive --e
 
 echo "Uploaded prowler output files to s3://$BUCKET_NAME/$FOLDER_NAME/"
 
-sleep infinity
+tail -f /dev/null
