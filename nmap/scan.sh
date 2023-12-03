@@ -29,7 +29,7 @@ xsltproc -o $REPORT_DIR/scan_$TIMESTAMP.html /usr/share/nmap/nmap.xsl $REPORT_DI
 # Rename the webxml file to HTML
 #mv $REPORT_DIR/scan_$TIMESTAMP.webxml $REPORT_DIR/scan_$TIMESTAMP.html
 
-echo "Scan complete. Reports are stored in $REPORT_DIR"
+echo "Scan complete. Reports are stored in $REPORT_DIR "
 
 # S3 Bucket details
 BUCKET_NAME=${BUCKET_NAME:-"jorges-test"}
