@@ -1,16 +1,13 @@
 name: Build and Push Docker Images
 
 on:
-  push:
-    paths:
-      - 'nmap/**'
-      - 'pacu/**'
-      - 'prowler/**'
-  pull_request:
-    paths:
-      - 'nmap/**'
-      - 'pacu/**'
-      - 'prowler/**'
+    push:
+      branches:
+        - main
+      paths:
+        - 'nmap/**'
+        - 'pacu/**'
+        - 'prowler/**'
 
 jobs:
   build-and-push:
@@ -35,14 +32,14 @@ jobs:
               - 'prowler/**'
 
       - name: Log in to Docker Hub
-        if: steps.filter.outputs.folder1 == 'true' || steps.filter.outputs.folder2 == 'true' || steps.filter.outputs.folder3 == 'true'
+        if: steps.filter.outputs.nmap == 'true' || steps.filter.outputs.pacu == 'true' || steps.filter.outputs.prowler == 'true'
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and push Docker image in ${{ matrix.folder }}
-        if: steps.filter.outputs['folder${{ matrix.folder[-1] }}'] == 'true'
+        if: steps.filter.outputs['${{ matrix.folder }}'] == 'true'
         run: |
           cd ${{ matrix.folder }}
           IMAGE_NAME='gorje6/ecs-${{ matrix.folder }}'  # Replace with your Docker Hub username and image name
