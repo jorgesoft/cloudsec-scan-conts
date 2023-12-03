@@ -29,7 +29,7 @@ xsltproc -o $REPORT_DIR/scan_$TIMESTAMP.html /usr/share/nmap/nmap.xsl $REPORT_DI
 # Rename the webxml file to HTML
 #mv $REPORT_DIR/scan_$TIMESTAMP.webxml $REPORT_DIR/scan_$TIMESTAMP.html
 
-echo "Scan complete. Reports are stored in $REPORT_DIR "
+echo "Scan complete. Reports are stored in $REPORT_DIR"
 
 # S3 Bucket details
 BUCKET_NAME=${BUCKET_NAME:-"jorges-test"}
@@ -39,6 +39,6 @@ FOLDER_NAME="scanning-results"
 aws s3 cp $REPORT_DIR/scan_$TIMESTAMP.html s3://$BUCKET_NAME/$FOLDER_NAME/scan_$TIMESTAMP.html
 aws s3 cp $REPORT_DIR/scan_$TIMESTAMP.xml s3://$BUCKET_NAME/$FOLDER_NAME/scan_$TIMESTAMP.xml
 
-echo "Reports uploaded to S3 bucket: $BUCKET_NAME/$FOLDER_NAME  "
+echo "Reports uploaded to S3 bucket: $BUCKET_NAME/$FOLDER_NAME"
 
 sleep infinity
