@@ -25,10 +25,6 @@ nmap -T4 -F --webxml -oA $REPORT_DIR/scan_$TIMESTAMP $IP_RANGE
 # Creating html report from xml file
 xsltproc -o $REPORT_DIR/scan_$TIMESTAMP.html /usr/share/nmap/nmap.xsl $REPORT_DIR/scan_$TIMESTAMP.xml
 
-
-# Rename the webxml file to HTML
-#mv $REPORT_DIR/scan_$TIMESTAMP.webxml $REPORT_DIR/scan_$TIMESTAMP.html
-
 echo "Scan complete. Reports are stored in $REPORT_DIR"
 
 # S3 Bucket details
