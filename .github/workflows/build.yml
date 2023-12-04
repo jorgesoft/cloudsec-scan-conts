@@ -2,8 +2,11 @@ name: Build and Push Docker Images
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'nmap/**'
+      - 'pacu/**'
+      - 'prowler/**'
+  pull_request:
     paths:
       - 'nmap/**'
       - 'pacu/**'
@@ -40,7 +43,7 @@ jobs:
             password: ${{ secrets.DOCKERHUB_PASSWORD }}
         - name: Build and push Docker image for Pacus
           run: |
-            cd nmap
+            cd pacu
             IMAGE_NAME='gorje6/ecs-pacus'
             TAG="${{ github.sha }}"
             docker build -t $IMAGE_NAME:$latest .
@@ -58,7 +61,7 @@ jobs:
             password: ${{ secrets.DOCKERHUB_PASSWORD }}
         - name: Build and push Docker image for Prowler
           run: |
-            cd nmap
+            cd prowler
             IMAGE_NAME='gorje6/ecs-prowler'
             TAG="${{ github.sha }}"
             docker build -t $IMAGE_NAME:$latest .
