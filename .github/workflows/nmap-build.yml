@@ -1,0 +1,34 @@
+name: Build Nmap Docker Image
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'nmap/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'nmap/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image for nmap
+        run: |
+          cd nmap
+          IMAGE_NAME='gorje6/ecs-nmap' # Replace with your Docker Hub username and repository name
+          TAG="${{ github.sha }}"
+          echo "Building Docker image $IMAGE_NAME:$TAG"
+          docker build -t $IMAGE_NAME:$TAG .
+          echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+          docker push $IMAGE_NAME:$TAG
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
