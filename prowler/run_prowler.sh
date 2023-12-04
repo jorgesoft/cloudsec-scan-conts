@@ -14,6 +14,6 @@ FOLDER_NAME="prowler-reports"
 # Upload all files starting with "prowler-output-" to the S3 bucket
 aws s3 cp /usr/src/app/output/ "s3://$BUCKET_NAME/$FOLDER_NAME/" --recursive --exclude "*" --include "prowler-output-*"
 
-echo "Uploaded prowler output files to s3://$BUCKET_NAME/$FOLDER_NAME/"
+echo "Uploaded prowler output files to s3://$BUCKET_NAME/$FOLDER_NAME/ "
 
 tail -f /dev/null
