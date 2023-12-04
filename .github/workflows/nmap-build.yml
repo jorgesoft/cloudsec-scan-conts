@@ -19,16 +19,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Build and push Docker image for nmap
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Build and push Docker image for Nmap
         run: |
-          cd nmap
-          IMAGE_NAME='gorje6/ecs-nmap' # Replace with your Docker Hub username and repository name
-          TAG="${{ github.sha }}"
-          echo "Building Docker image $IMAGE_NAME:$TAG"
-          docker build -t $IMAGE_NAME:$TAG .
-          echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-          docker push $IMAGE_NAME:$TAG
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+            cd nmap
+            IMAGE_NAME='gorje6/ecs-nmap'
+            TAG="${{ github.sha }}"
+            docker build -t $IMAGE_NAME:$latest .
+            docker push $IMAGE_NAME:$latest
