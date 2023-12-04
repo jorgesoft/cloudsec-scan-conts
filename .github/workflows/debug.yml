@@ -1,0 +1,17 @@
+name: Print Modified Files
+
+on: push
+
+jobs:
+  print-modified-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Print the list of modified files
+        run: |
+          echo "Modified files in the last commit:"
+          for file in ${{ toJson(github.event.head_commit.modified) }}; do
+            echo $file
+          done
